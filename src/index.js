@@ -10,13 +10,10 @@ function Square(props) {
     );
 }
 
-class Row extends React.Component {
+class InnerSquare extends React.Component {
     renderSquare(i) {
         return (
-            <Square
-                // value={this.props.squares[i]}
-                // onClick={() => this.props.onClick(i)}
-            />
+            <Square />
         );
     }
 
@@ -26,16 +23,50 @@ class Row extends React.Component {
                 {this.renderSquare(0)}
                 {this.renderSquare(1)}
                 {this.renderSquare(2)}
-                {this.renderSquare(3)}
-                {this.renderSquare(4)}
-                {this.renderSquare(5)}
-                {this.renderSquare(6)}
-                {this.renderSquare(7)}
-                {this.renderSquare(8)}
             </div>
         );
     }
 
+}
+
+class OuterSquare extends React.Component {
+    renderInnerSquare(i) {
+        return (
+            <InnerSquare />
+        );
+    }
+
+    render() {
+        return (
+            <div className="outer-square">
+                {this.renderInnerSquare(0)}
+                {this.renderInnerSquare(1)}
+                {this.renderInnerSquare(2)}
+            </div>
+        );
+    }
+
+}
+
+class Row extends React.Component {
+    renderOuterSquare(i) {
+        return (
+            <OuterSquare />
+        );
+    }
+
+    render() {
+        const status = 'Sudoku';
+        return (
+            <div>
+                <div>
+                    {this.renderOuterSquare(0)}
+                    {this.renderOuterSquare(1)}
+                    {this.renderOuterSquare(2)}
+                </div>
+            </div>
+        );
+    }
 }
 
 class Board extends React.Component {
@@ -52,14 +83,12 @@ class Board extends React.Component {
                 <div className="status">{status}</div>
                 <div>
                     {this.renderRow(0)}
+                </div>
+                <div>
                     {this.renderRow(1)}
+                </div>
+                <div>
                     {this.renderRow(2)}
-                    {this.renderRow(3)}
-                    {this.renderRow(4)}
-                    {this.renderRow(5)}
-                    {this.renderRow(6)}
-                    {this.renderRow(7)}
-                    {this.renderRow(8)}
                 </div>
             </div>
         );
