@@ -95,16 +95,55 @@ class Board extends React.Component {
     }
 }
 
+function NumberSquare(props) {
+    return (
+        <button className="number-square" onClick={props.onClick}>
+            {props.value}
+        </button>
+    );
+}
+
+class Numbers extends React.Component {
+    renderNumberSquare(i) {
+        return (
+            <NumberSquare
+                value={i + 1}
+                onClick={() => this.props.onClick(i)}
+            />
+        );
+    }
+    render() {
+        return (
+            <div>
+                {this.renderNumberSquare(0)}
+                {this.renderNumberSquare(1)}
+                {this.renderNumberSquare(2)}
+                {this.renderNumberSquare(3)}
+                {this.renderNumberSquare(4)}
+                {this.renderNumberSquare(5)}
+                {this.renderNumberSquare(6)}
+                {this.renderNumberSquare(7)}
+                {this.renderNumberSquare(8)}
+            </div>
+        )
+    }
+}
+
 class Game extends React.Component {
     render() {
         return (
-            <div className="game">
-                <div className="game-board">
-                    <Board />
+            <div>
+                <div className="game">
+                    <div className="game-board">
+                        <Board />
+                    </div>
+                    <div className="game-info">
+                        <div>{/* status */}</div>
+                        <div>{/* backButton */}</div>
+                    </div>
                 </div>
-                <div className="game-info">
-                    <div>{/* status */}</div>
-                    <div>{/* backButton */}</div>
+                <div>
+                    <Numbers />
                 </div>
             </div>
         );
